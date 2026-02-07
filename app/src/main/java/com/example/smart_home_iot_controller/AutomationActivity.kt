@@ -1,21 +1,16 @@
 package com.example.smart_home_iot_controller
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
-class RoomDetailsActivity : AppCompatActivity() {
+class AutomationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_room_details)
-
+        setContentView(R.layout.activity_automation)
+        
         findViewById<ImageView>(R.id.ivBack).setOnClickListener {
             finish()
         }
-
-        // Add logic to open Smart Light or AC Control
-        // Assuming there are views with these IDs or similar logic
-        // For demo: Clicking on the center card or a specific device item
     }
 }

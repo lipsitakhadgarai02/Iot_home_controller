@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_active"
+        android:title="Home" />
+    <item
+        android:id="@+id/nav_devices"
+        android:icon="@drawable/ic_devices"
+        android:title="Devices" />
+    <item
+        android:id="@+id/nav_add_device"
+        android:icon="@android:drawable/ic_menu_add"
+        android:title="Add Device" />
+    <item
+        android:id="@+id/nav_automation"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:title="Automation" />
+    <item
+        android:id="@+id/nav_sensors"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="Sensors" />
+    <item
+        android:id="@+id/nav_notifications"
+        android:icon="@drawable/ic_notification"
+        android:title="Notifications" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@android:drawable/ic_lock_power_off"
+        android:title="Logout" />
+</menu>
