@@ -9,8 +9,7 @@ class AutomationActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_automation)
         
-        findViewById<ImageView>(R.id.ivBack).setOnClickListener {
-            finish()
-        }
+        // Simple back navigation
+        findViewById<ImageView>(R.id.ivBack)?.setOnClickListener { finish() }
     }
 }

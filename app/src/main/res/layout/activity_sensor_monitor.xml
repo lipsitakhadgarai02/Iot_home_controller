@@ -15,13 +15,13 @@
         android:src="@drawable/ic_arrow_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/text_main_light" />
+        app:tint="@color/text_dark" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sensors Status"
-        android:textColor="@color/text_main_light"
+        android:textColor="@color/text_dark"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@id/ivBack"
@@ -43,7 +43,8 @@
             android:layout_margin="8dp"
             android:layout_columnWeight="1"
             app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/room_orange_bg">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,14 +56,14 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/ic_light"
-                    app:tint="@color/primary_purple" />
+                    app:tint="@color/text_dark" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="24°C"
-                    android:textColor="@color/text_main_light"
+                    android:textColor="@color/text_dark"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -70,8 +71,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Temperature"
-                    android:textColor="@color/text_sub_light"
-                    android:textSize="12sp" />
+                    android:textColor="@color/text_grey"
+                    android:textSize="14sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -81,7 +82,8 @@
             android:layout_margin="8dp"
             android:layout_columnWeight="1"
             app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/room_blue_bg">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,14 +95,14 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/ic_notification"
-                    app:tint="@color/primary_purple" />
+                    app:tint="@color/text_dark" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="45%"
-                    android:textColor="@color/text_main_light"
+                    android:textColor="@color/text_dark"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -108,8 +110,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Humidity"
-                    android:textColor="@color/text_sub_light"
-                    android:textSize="12sp" />
+                    android:textColor="@color/text_grey"
+                    android:textSize="14sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 
@@ -119,7 +121,8 @@
             android:layout_margin="8dp"
             android:layout_columnWeight="1"
             app:cardCornerRadius="24dp"
-            app:cardElevation="2dp">
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@color/room_green_bg">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -131,14 +134,14 @@
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:src="@drawable/ic_settings"
-                    app:tint="@color/primary_purple" />
+                    app:tint="@color/text_dark" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
                     android:text="Safe"
-                    android:textColor="@color/text_main_light"
+                    android:textColor="@color/text_dark"
                     android:textSize="24sp"
                     android:textStyle="bold" />
 
@@ -146,8 +149,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Gas Level"
-                    android:textColor="@color/text_sub_light"
-                    android:textSize="12sp" />
+                    android:textColor="@color/text_grey"
+                    android:textSize="14sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
 

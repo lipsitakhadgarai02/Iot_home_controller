@@ -25,6 +25,10 @@
         android:icon="@drawable/ic_notification"
         android:title="Notifications" />
     <item
+        android:id="@+id/nav_theme_toggle"
+        android:icon="@android:drawable/ic_menu_day"
+        android:title="Switch Theme" />
+    <item
         android:id="@+id/nav_logout"
         android:icon="@android:drawable/ic_lock_power_off"
         android:title="Logout" />

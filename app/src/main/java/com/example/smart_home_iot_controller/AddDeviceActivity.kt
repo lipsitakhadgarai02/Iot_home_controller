@@ -11,10 +11,18 @@ class AddDeviceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_add_device)
 
-        findViewById<ImageView>(R.id.ivBack).setOnClickListener { finish() }
+        // Back navigation
+        findViewById<ImageView>(R.id.ivBack).setOnClickListener {
+            finish()
+        }
 
+        // Navigate to Connecting screen on button click
         findViewById<Button>(R.id.btnSubmit).setOnClickListener {
-            // Flow: Add Device -> Connecting
+            startActivity(Intent(this, ConnectingActivity::class.java))
+        }
+
+        // Placeholder for QR Scan click
+        findViewById<com.google.android.material.card.MaterialCardView>(R.id.cardScanQr).setOnClickListener {
             startActivity(Intent(this, ConnectingActivity::class.java))
         }
     }

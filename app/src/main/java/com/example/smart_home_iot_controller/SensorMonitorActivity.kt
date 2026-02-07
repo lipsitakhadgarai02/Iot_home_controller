@@ -9,8 +9,6 @@ class SensorMonitorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sensor_monitor)
         
-        findViewById<ImageView>(R.id.ivBack).setOnClickListener {
-            finish()
-        }
+        findViewById<ImageView>(R.id.ivBack)?.setOnClickListener { finish() }
     }
 }

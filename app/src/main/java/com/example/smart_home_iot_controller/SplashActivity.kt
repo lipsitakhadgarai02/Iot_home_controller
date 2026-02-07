@@ -4,8 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.animation.AnimationUtils
-import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 
 class SplashActivity : AppCompatActivity() {
@@ -13,13 +11,16 @@ class SplashActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
 
-        val logo = findViewById<ImageView>(R.id.ivLogo)
-        val fadeIn = AnimationUtils.loadAnimation(this, android.R.anim.fade_in)
-        logo.startAnimation(fadeIn)
+        val sessionManager = SessionManager(this)
 
-        // Navigate to Login after 2 seconds
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, LoginActivity::class.java))
+            if (sessionManager.isLoggedIn()) {
+                // User already logged in, go to Dashboard
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                // Not logged in, go to Login
+                startActivity(Intent(this, LoginActivity::class.java))
+            }
             finish()
         }, 2000)
     }

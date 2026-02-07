@@ -6,7 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Fixed: Added ID and layout_width/height -->
+    <ImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:src="@drawable/ic_launcher_foreground"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:contentDescription="Back"/>
+
     <TextView
         android:id="@+id/tvTitle"
         android:layout_width="wrap_content"
@@ -18,7 +27,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp"/>
 
-    <!-- Fixed: Corrected constraints from 'toBottomOf parent' to 'top of title' and added dimensions -->
     <com.google.android.material.switchmaterial.SwitchMaterial
         android:id="@+id/switchLight"
         android:layout_width="wrap_content"
@@ -28,7 +36,16 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="24dp"/>
 
-    <!-- Fixed: Corrected drawable name to 'circular_progress_bar', fixed constraints, and added style -->
+    <TextView
+        android:id="@+id/tvStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Off"
+        android:textAppearance="?attr/textAppearanceLabelMedium"
+        app:layout_constraintTop_toBottomOf="@id/switchLight"
+        app:layout_constraintEnd_toEndOf="@id/switchLight"
+        android:layout_marginEnd="8dp"/>
+
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -43,7 +60,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="32dp"/>
 
-    <!-- Fixed: Centered text inside the ProgressBar and corrected constraints -->
     <TextView
         android:id="@+id/tvPercentage"
         android:layout_width="wrap_content"
