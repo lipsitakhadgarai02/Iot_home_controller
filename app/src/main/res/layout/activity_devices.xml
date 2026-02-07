@@ -136,8 +136,10 @@
         android:padding="12dp"
         app:layout_constraintBottom_toTopOf="@id/bottomNavContainer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/hsvFilters"
+        app:layout_constraintVertical_bias="1.0"
         tools:listitem="@layout/item_device_card" />
 
     <!-- Premium Floating Navigation -->
