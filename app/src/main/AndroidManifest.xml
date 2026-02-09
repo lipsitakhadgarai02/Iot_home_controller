@@ -27,6 +27,8 @@
         <activity android:name=".RoomDetailsActivity" />
         <activity android:name=".DevicesActivity" />
         <activity android:name=".SmartLightActivity" />
+        <activity android:name=".NotificationsActivity" />
+        <activity android:name=".AutomationActivity" />
 
     </application>
 

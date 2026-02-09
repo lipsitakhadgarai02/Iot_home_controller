@@ -1,149 +1,82 @@
 package com.example.smart_home_iot_controller
 
-import android.Manifest
-import android.content.Intent
-import android.content.pm.PackageManager
-import android.os.Build
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var navController: NavController
     private lateinit var drawerLayout: DrawerLayout
-    private val sessionManager by lazy { SessionManager(this) }
-
-    private val requestPermissionLauncher = registerForActivityResult(
-        ActivityResultContracts.RequestMultiplePermissions()
-    ) { }
+    private var backPressedTime: Long = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home_dashboard)
+        setContentView(R.layout.activity_main)
 
-        drawerLayout = findViewById(R.id.main)
+        drawerLayout = findViewById(R.id.drawer_layout)
         val navView = findViewById<NavigationView>(R.id.nav_view)
-        val ivMenu = findViewById<ImageView>(R.id.ivMenu)
+        val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_nav)
 
-        ViewCompat.setOnApplyWindowInsetsListener(drawerLayout) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom)
-            insets
-        }
+        val navHostFragment = supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        navController = navHostFragment.navController
 
-        checkPermissions()
+        // Setup Bottom Navigation
+        bottomNav.setupWithNavController(navController)
+        
+        // Setup Side Navigation (Drawer)
+        NavigationUI.setupWithNavController(navView, navController)
 
-        // --- Setup RecyclerView for Rooms ---
-        val rvRooms = findViewById<RecyclerView>(R.id.rvRooms)
-        rvRooms.layoutManager = LinearLayoutManager(this)
-        rvRooms.adapter = RoomAdapter(listOf(
-            Room("Living Room", "6 devices"),
-            Room("Bedroom", "4 devices"),
-            Room("Kitchen", "2 devices")
-        ))
-
-        ivMenu.setOnClickListener {
-            drawerLayout.openDrawer(GravityCompat.START)
-        }
-
-        navView.setNavigationItemSelectedListener { item ->
-            when (item.itemId) {
-                R.id.nav_home -> drawerLayout.closeDrawers()
-                R.id.nav_devices -> startActivity(Intent(this, DevicesActivity::class.java))
-                R.id.nav_add_device -> startActivity(Intent(this, AddDeviceActivity::class.java))
-                R.id.nav_automation -> startActivity(Intent(this, AutomationActivity::class.java))
-                R.id.nav_sensors -> startActivity(Intent(this, SensorMonitorActivity::class.java))
-                R.id.nav_notifications -> startActivity(Intent(this, NotificationsActivity::class.java))
-                R.id.nav_theme_toggle -> toggleTheme()
-                R.id.nav_logout -> logout()
+        // Handle Bottom Nav visibility and Back Stack
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            when (destination.id) {
+                R.id.homeFragment, R.id.devicesFragment, R.id.notificationsFragment, R.id.automationFragment -> {
+                    bottomNav.visibility = View.VISIBLE
+                }
+                else -> {
+                    bottomNav.visibility = View.GONE
+                }
             }
-            drawerLayout.closeDrawers()
-            true
         }
 
-        findViewById<ImageView>(R.id.nav_devices).setOnClickListener {
-            startActivity(Intent(this, DevicesActivity::class.java))
-        }
-        findViewById<ImageView>(R.id.nav_notifications).setOnClickListener {
-            startActivity(Intent(this, NotificationsActivity::class.java))
-        }
-        findViewById<ImageView>(R.id.nav_settings).setOnClickListener {
-            startActivity(Intent(this, AutomationActivity::class.java))
-        }
+        setupBackPress()
     }
 
-    private fun checkPermissions() {
-        val permissions = mutableListOf<String>()
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
-        }
-        permissions.add(Manifest.permission.ACCESS_FINE_LOCATION)
-        val neededPermissions = permissions.filter {
-            ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED
-        }
-        if (neededPermissions.isNotEmpty()) {
-            requestPermissionLauncher.launch(neededPermissions.toTypedArray())
-        }
+    fun openDrawer() {
+        drawerLayout.openDrawer(GravityCompat.START)
     }
 
-    private fun toggleTheme() {
-        val mode = if (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)
-            AppCompatDelegate.MODE_NIGHT_NO else AppCompatDelegate.MODE_NIGHT_YES
-        AppCompatDelegate.setDefaultNightMode(mode)
-    }
-
-    private fun logout() {
-        sessionManager.logout()
-        startActivity(Intent(this, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+    private fun setupBackPress() {
+        onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+                    drawerLayout.closeDrawer(GravityCompat.START)
+                } else if (navController.currentDestination?.id == R.id.homeFragment) {
+                    if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                        finish()
+                    } else {
+                        Toast.makeText(this@MainActivity, "Press back again to exit", Toast.LENGTH_SHORT).show()
+                        backPressedTime = System.currentTimeMillis()
+                    }
+                } else {
+                    if (!navController.popBackStack()) {
+                        finish()
+                    }
+                }
+            }
         })
-        finish()
-    }
-
-    override fun onBackPressed() {
-        if (drawerLayout.isDrawerOpen(GravityCompat.START)) drawerLayout.closeDrawer(GravityCompat.START)
-        else super.onBackPressed()
-    }
-
-    // --- Simple Adapter and Data Class ---
-    data class Room(val name: String, val devices: String)
-
-    private inner class RoomAdapter(private val rooms: List<Room>) : RecyclerView.Adapter<RoomAdapter.ViewHolder>() {
-        inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val tvName: TextView = view.findViewById(R.id.tvRoomName)
-            val tvCount: TextView = view.findViewById(R.id.tvDeviceCount)
-        }
-
-        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-            val view = LayoutInflater.from(parent.context).inflate(R.layout.item_room_card, parent, false)
-            return ViewHolder(view)
-        }
-
-        override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-            holder.tvName.text = rooms[position].name
-            holder.tvCount.text = rooms[position].devices
-            holder.itemView.setOnClickListener {
-                startActivity(Intent(this@MainActivity, RoomDetailsActivity::class.java))
-            }
-        }
-
-        override fun getItemCount() = rooms.size
     }
 }

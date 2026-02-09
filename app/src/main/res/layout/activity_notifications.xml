@@ -36,7 +36,10 @@
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
         android:paddingHorizontal="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavContainer"
         app:layout_constraintTop_toBottomOf="@id/ivBack" />
+
+    <!-- Reusable Bottom Nav -->
+    <include layout="@layout/layout_bottom_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

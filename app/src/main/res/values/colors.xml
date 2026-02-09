@@ -20,7 +20,7 @@
     <color name="text_secondary_dark">#A1A1A1</color>
 
     <!-- Unified Text Aliases (Fixes Linking Errors) -->
-    <color name="text_main_light">#1A1C1E</color>
+    <color name="text_main_light">#000000</color>
     <color name="text_sub_light">#6C757D</color>
     <color name="text_main_dark">#EDEDED</color>
     <color name="text_sub_dark">#A1A1A1</color>

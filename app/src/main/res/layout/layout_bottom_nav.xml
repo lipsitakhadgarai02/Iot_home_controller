@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/bottomNavContainer"
+    android:layout_width="0dp"
+    android:layout_height="72dp"
+    android:layout_marginHorizontal="24dp"
+    android:layout_marginBottom="50dp"
+    app:cardBackgroundColor="@color/white"
+    app:cardCornerRadius="36dp"
+    app:cardElevation="12dp"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingHorizontal="24dp">
+
+        <ImageView
+            android:id="@+id/nav_home"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_home_active"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nav_devices"
+            app:layout_constraintHorizontal_chainStyle="spread_inside"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_sub_light" />
+
+        <ImageView
+            android:id="@+id/nav_devices"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_devices"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nav_notifications"
+            app:layout_constraintStart_toEndOf="@+id/nav_home"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_sub_light" />
+
+        <ImageView
+            android:id="@+id/nav_notifications"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_notification"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/nav_settings"
+            app:layout_constraintStart_toEndOf="@+id/nav_devices"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_sub_light" />
+
+        <ImageView
+            android:id="@+id/nav_settings"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:src="@drawable/ic_settings"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/nav_notifications"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_sub_light" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="false">
+    android:fitsSystemWindows="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -13,11 +13,10 @@
         android:background="@color/bg_light">
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/scrollView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:fillViewport="true"
-            app:layout_constraintBottom_toTopOf="@id/bottomNavContainer"
+            app:layout_constraintBottom_toTopOf="@+id/bottomNavContainer"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +24,6 @@
                 android:layout_height="wrap_content"
                 android:paddingBottom="24dp">
 
-                <!-- Header: Hamburger on Left, Avatar on Right -->
                 <ImageView
                     android:id="@+id/ivMenu"
                     android:layout_width="44dp"
@@ -50,7 +48,6 @@
                     app:layout_constraintTop_toTopOf="@id/ivMenu">
 
                     <TextView
-                        android:id="@+id/tvGreeting"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Hi Emon 👋"
@@ -59,7 +56,6 @@
                         android:textStyle="bold" />
 
                     <TextView
-                        android:id="@+id/tvWelcome"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Welcome to your home"
@@ -79,7 +75,6 @@
                     app:layout_constraintTop_toTopOf="@id/ivMenu"
                     app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Full" />
 
-                <!-- Environment Card -->
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardClimateSummary"
                     android:layout_width="0dp"
@@ -129,7 +124,6 @@
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
 
-                <!-- Room Header -->
                 <TextView
                     android:id="@+id/tvRoomHeader"
                     android:layout_width="wrap_content"
@@ -143,7 +137,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/cardClimateSummary" />
 
-                <!-- Rooms List -->
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rvRooms"
                     android:layout_width="match_parent"
@@ -158,12 +151,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.core.widget.NestedScrollView>
 
-        <!-- Floating Navigation -->
+        <!-- Bottom Navigation Bar - Fixed 50dp Margin -->
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/bottomNavContainer"
             android:layout_width="0dp"
             android:layout_height="72dp"
-            android:layout_margin="24dp"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginBottom="50dp"
             app:cardBackgroundColor="@color/white"
             app:cardCornerRadius="36dp"
             app:cardElevation="12dp"
@@ -182,7 +176,7 @@
                     android:layout_height="28dp"
                     android:src="@drawable/ic_home_active"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/nav_devices"
+                    app:layout_constraintEnd_toStartOf="@+id/nav_devices"
                     app:layout_constraintHorizontal_chainStyle="spread_inside"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -194,8 +188,8 @@
                     android:layout_height="28dp"
                     android:src="@drawable/ic_devices"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/nav_notifications"
-                    app:layout_constraintStart_toEndOf="@id/nav_home"
+                    app:layout_constraintEnd_toStartOf="@+id/nav_notifications"
+                    app:layout_constraintStart_toEndOf="@+id/nav_home"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/text_sub_light" />
 
@@ -205,8 +199,8 @@
                     android:layout_height="28dp"
                     android:src="@drawable/ic_notification"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/nav_settings"
-                    app:layout_constraintStart_toEndOf="@id/nav_devices"
+                    app:layout_constraintEnd_toStartOf="@+id/nav_settings"
+                    app:layout_constraintStart_toEndOf="@+id/nav_devices"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/text_sub_light" />
 
@@ -217,7 +211,7 @@
                     android:src="@drawable/ic_settings"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/nav_notifications"
+                    app:layout_constraintStart_toEndOf="@+id/nav_notifications"
                     app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/text_sub_light" />
 
@@ -226,7 +220,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <!-- Navigation Drawer -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
